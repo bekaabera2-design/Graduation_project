@@ -385,12 +385,7 @@
             if (e.key === 'Enter') {
                 document.getElementById('loginForm').dispatchEvent(new Event('submit'));
             }
-        });
-
-        // ============================================
-        // TEST CONNECTION ON PAGE LOAD
-        // ============================================
-        
+        });  
         async function testConnection() {
             try {
                 const response = await fetch(`${API_BASE_URL}/test`);
@@ -403,8 +398,6 @@
                 console.log('💡 Make sure backend is running: cd backend && node server.js');
             }
         }
-
-        // Test connection when page loads
         testConnection();
 
         console.log('✅ Login page loaded!');
