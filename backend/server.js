@@ -35,9 +35,6 @@ app.get('/api/test', (req, res) => {
     });
 });
 
-// ============================================
-// SETUP ROUTE
-// ============================================
 app.get('/api/setup', async (req, res) => {
     try {
         await pool.query(`
@@ -87,9 +84,6 @@ app.get('/api/setup', async (req, res) => {
     }
 });
 
-// ============================================
-// GET ALL USERS
-// ============================================
 app.get('/api/users', async (req, res) => {
     try {
         const result = await pool.query('SELECT id, name, email, role, department FROM users');
@@ -99,9 +93,6 @@ app.get('/api/users', async (req, res) => {
     }
 });
 
-// ============================================
-// REGISTER ROUTE - YOUR CODE GOES HERE ✅
-// ============================================
 app.post('/api/auth/register', async (req, res) => {
     try {
         const { name, email, password, role, department, phone, year_of_study } = req.body;
@@ -161,9 +152,6 @@ app.post('/api/auth/register', async (req, res) => {
     }
 });
 
-// ============================================
-// LOGIN ROUTE
-// ============================================
 app.post('/api/auth/login', async (req, res) => {
     const { email, password } = req.body;
     
@@ -223,9 +211,6 @@ app.post('/api/auth/login', async (req, res) => {
     }
 });
 
-// ============================================
-// START SERVER
-// ============================================
 app.listen(PORT, () => {
     console.log('');
     console.log('🚀 ========================================');
