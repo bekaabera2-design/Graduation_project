@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Project - GC Defense Hub</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="logo-icon">🛡️</div>
+                <h2>GC <span>Defense</span></h2>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+                <li><a href="#"><span class="nav-icon">📁</span> My Projects</a></li>
+                <li><a href="#" class="active"><span class="nav-icon">📤</span> Upload Project</a></li>
+                <li><a href="#"><span class="nav-icon">👤</span> Profile</a></li>
+                <li><hr class="sidebar-divider" /></li>
+                <li><a href="#"><span class="nav-icon">🚪</span> Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="topbar">
+                <div class="topbar-left">
+                    <h1>Upload Project</h1>
+                    <div class="breadcrumb">Home / <span>Upload Project</span></div>
+                </div>
+                <div class="topbar-right">
+                    <div class="user-profile">
+                        <div class="avatar">JD</div>
+                        <span style="color: var(--text-secondary);">John Doe</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload Form -->
+            <div style="max-width: 800px;">
+                <form>
+                    <div class="form-group">
+                        <label>Project Title *</label>
+                        <input type="text" placeholder="Enter project title" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Department *</label>
+                        <select required>
+                            <option value="">Select Department</option>
+                            <option>Computer Science</option>
+                            <option>Information Technology</option>
+                            <option>Agriculture</option>
+                            <option>Engineering</option>
+                            <option>Business</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Supervisor</label>
+                        <input type="text" placeholder="Enter supervisor name" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Project Description *</label>
+                        <textarea rows="4" placeholder="Describe your project..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Keywords</label>
+                        <input type="text" placeholder="e.g., AI, Machine Learning, Database" />
+                        <div class="form-hint">Separate keywords with commas</div>
+                    </div>
+
+                    <!-- Upload Area -->
+                    <div class="upload-area">
+                        <div class="upload-icon">📄</div>
+                        <h3>Click to upload or drag and drop</h3>
+                        <p>PDF files only (Max 10MB)</p>
+                        <input type="file" accept=".pdf" style="display: none;" id="fileInput" />
+                        <button type="button" class="upload-btn" onclick="document.getElementById('fileInput').click();">
+                            Choose PDF File
+                        </button>
+                        <div id="fileName" style="margin-top: 12px; color: var(--text-muted); font-size: 0.9rem;"></div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">
+                        Submit Project 🚀
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            if (this.files.length > 0) {
+                document.getElementById('fileName').textContent = '📎 ' + this.files[0].name;
+            }
+        });
+    </script>
+</body>
+</html>

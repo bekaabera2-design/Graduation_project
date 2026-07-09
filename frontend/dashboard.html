@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - GC Defense Hub</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="logo-icon">🛡️</div>
+                <h2>GC <span>Defense</span></h2>
+            </div>
+
+            <ul class="sidebar-nav">
+                <li><a href="#" class="active"><span class="nav-icon">📊</span> Dashboard</a></li>
+                <li><a href="#"><span class="nav-icon">📁</span> My Projects</a></li>
+                <li><a href="upload.html"><span class="nav-icon">📤</span> Upload Project</a></li>
+                <li><a href="#"><span class="nav-icon">👤</span> Profile</a></li>
+                <li><hr class="sidebar-divider" /></li>
+                <li><a href="#"><span class="nav-icon">🚪</span> Logout</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <div class="topbar">
+                <div class="topbar-left">
+                    <h1>Dashboard</h1>
+                    <div class="breadcrumb">Home / <span>Dashboard</span></div>
+                </div>
+                <div class="topbar-right">
+                    <div class="notification">
+                        🔔
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <div class="avatar">JD</div>
+                        <span style="color: var(--text-secondary);">John Doe</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Total Projects</div>
+                    <div class="stat-number">24</div>
+                    <div class="stat-change up">↑ 12% this month</div>
+                </div>
+                <div class="stat-card" style="border-left-color: var(--success);">
+                    <div class="stat-label">Approved</div>
+                    <div class="stat-number">18</div>
+                    <div class="stat-change up">↑ 8% this month</div>
+                </div>
+                <div class="stat-card" style="border-left-color: var(--warning);">
+                    <div class="stat-label">Pending</div>
+                    <div class="stat-number">4</div>
+                    <div class="stat-change down">↓ 2 this month</div>
+                </div>
+                <div class="stat-card" style="border-left-color: var(--danger);">
+                    <div class="stat-label">Rejected</div>
+                    <div class="stat-number">2</div>
+                    <div class="stat-change down">↓ 1 this month</div>
+                </div>
+            </div>
+
+            <!-- Approved Projects -->
+            <div class="section-header">
+                <h2>✅ Approved Projects</h2>
+                <a href="#" class="view-all">View All Projects →</a>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <span class="project-badge">Computer Science</span>
+                    <h3>AI Based Attendance System</h3>
+                    <p class="project-meta">By John Doe • 3 days ago</p>
+                    <div class="project-footer">
+                        <span class="year">2024</span>
+                        <span class="status status-approved">✅ Approved</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-badge">Agriculture</span>
+                    <h3>Smart Irrigation System</h3>
+                    <p class="project-meta">By Jane Smith • 1 week ago</p>
+                    <div class="project-footer">
+                        <span class="year">2024</span>
+                        <span class="status status-approved">✅ Approved</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-badge">Information Technology</span>
+                    <h3>E-Library Management System</h3>
+                    <p class="project-meta">By Mike Johnson • 2 weeks ago</p>
+                    <div class="project-footer">
+                        <span class="year">2024</span>
+                        <span class="status status-approved">✅ Approved</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

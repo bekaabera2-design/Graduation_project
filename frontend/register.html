@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - GC Defense Hub</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        .register-box {
+            max-width: 520px;
+        }
+
+        .register-box .auth-header .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        .register-box .auth-header .logo-big {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            display: inline-block;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .password-strength {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .password-strength .strength-bar {
+            flex: 1;
+            height: 4px;
+            background: var(--navy-border);
+            border-radius: var(--radius-full);
+            transition: var(--transition);
+        }
+
+        .password-strength .strength-bar.active.weak {
+            background: var(--danger);
+        }
+
+        .password-strength .strength-bar.active.medium {
+            background: var(--warning);
+        }
+
+        .password-strength .strength-bar.active.strong {
+            background: var(--success);
+        }
+
+        .password-hint {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .password-hint .hint-icon {
+            font-size: 1rem;
+        }
+
+        .terms-check {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 20px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .terms-check input[type="checkbox"] {
+            margin-top: 3px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .terms-check a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .terms-check a:hover {
+            color: var(--primary-light);
+            text-decoration: underline;
+        }
+
+        .register-divider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 25px 0;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .register-divider::before,
+        .register-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--navy-border);
+        }
+
+        .social-register {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .social-register .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: var(--navy-light);
+            border: 1px solid var(--navy-border);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            flex: 1;
+            text-decoration: none;
+        }
+
+        .social-register .social-btn:hover {
+            border-color: var(--primary);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .social-register .social-btn .social-icon {
+            font-size: 1.2rem;
+        }
+
+        .auth-links {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--navy-border);
+            color: var(--text-secondary);
+        }
+
+        .auth-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .auth-links a:hover {
+            color: var(--primary-light);
+            text-decoration: underline;
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon .input-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .input-with-icon .form-input {
+            padding-left: 42px;
+        }
+
+        .input-with-icon .toggle-password {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .input-with-icon .toggle-password:hover {
+            color: var(--text-primary);
+        }
+
+        .success-check {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .success-check .check-icon {
+            font-size: 4rem;
+            animation: bounceIn 0.6s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+
+        .alert {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-danger {
+            background: rgba(255, 71, 87, 0.15);
+            color: #FF4757;
+            border-left: 4px solid #FF4757;
+        }
+
+        .alert-success {
+            background: rgba(0, 200, 151, 0.15);
+            color: #00C897;
+            border-left: 4px solid #00C897;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s ease-in-out infinite;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .social-register {
+                flex-direction: column;
+            }
+            .register-box {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+    
+    <div class="auth-container">
+        <div class="auth-box register-box">
+            <div class="auth-header">
+                <div class="logo-big">🛡️</div>
+                <h1>Create <span>Account</span></h1>
+                <p class="subtitle">Join GC Defense Hub and showcase your project</p>
+            </div>
+
+            <div id="alertContainer"></div>
+
+            <div class="success-check" id="successMessage">
+                <div class="check-icon">✅</div>
+                <h3 style="margin: 15px 0 10px; color: var(--success);">Registration Successful!</h3>
+                <p style="color: var(--text-secondary);">Welcome to GC Defense Hub. You can now login.</p>
+                <a href="login.html" class="btn btn-primary" style="margin-top: 20px;">Login Now 🚀</a>
+            </div>
+
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Full Name <span style="color: var(--danger);">*</span></label>
+                    <div class="input-with-icon">
+                        <span class="input-icon">👤</span>
+                        <input type="text" class="form-input" id="name" placeholder="Enter your full name" required />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email Address <span style="color: var(--danger);">*</span></label>
+                        <div class="input-with-icon">
+                            <span class="input-icon">📧</span>
+                            <input type="email" class="form-input" id="email" placeholder="you@example.com" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <div class="input-with-icon">
+                            <span class="input-icon">📱</span>
+                            <input type="tel" class="form-input" id="phone" placeholder="+251 9XX XXX XXX" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Department <span style="color: var(--danger);">*</span></label>
+                        <select class="form-input" id="department" required>
+                            <option value="">Select Department</option>
+                            <option>Computer Science</option>
+                            <option>Information Technology</option>
+                            <option>Software Engineering</option>
+                            <option>Agriculture</option>
+                            <option>Engineering</option>
+                            <option>Business Administration</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Year of Study</label>
+                        <select class="form-input" id="year">
+                            <option value="">Select Year</option>
+                            <option>1st Year</option>
+                            <option>2nd Year</option>
+                            <option>3rd Year</option>
+                            <option>4th Year</option>
+                            <option>5th Year</option>
+                            <option>Graduated</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password <span style="color: var(--danger);">*</span></label>
+                    <div class="input-with-icon">
+                        <span class="input-icon">🔒</span>
+                        <input type="password" class="form-input" id="password" placeholder="Create a strong password" required oninput="checkPasswordStrength(this.value)" />
+                        <button type="button" class="toggle-password" onclick="togglePassword('password')">👁️</button>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-bar" id="bar1"></div>
+                        <div class="strength-bar" id="bar2"></div>
+                        <div class="strength-bar" id="bar3"></div>
+                    </div>
+                    <div class="password-hint">
+                        <span class="hint-icon">💡</span>
+                        <span id="passwordHint">Use 8+ characters with letters, numbers & symbols</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm Password <span style="color: var(--danger);">*</span></label>
+                    <div class="input-with-icon">
+                        <span class="input-icon">✅</span>
+                        <input type="password" class="form-input" id="confirmPassword" placeholder="Confirm your password" required oninput="checkPasswordMatch()" />
+                        <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword')">👁️</button>
+                    </div>
+                    <div id="passwordMatch" style="font-size: 0.85rem; margin-top: 4px;"></div>
+                </div>
+
+                <div class="terms-check">
+                    <input type="checkbox" id="terms" required />
+                    <label for="terms">
+                        I agree to the 
+                        <a href="#">Terms of Service</a> 
+                        and 
+                        <a href="#">Privacy Policy</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg" id="registerBtn">
+                    Create Account 🚀
+                </button>
+
+                <div class="register-divider">or register with</div>
+
+                <div class="social-register">
+                    <button type="button" class="social-btn">
+                        <span class="social-icon">🔵</span> Google
+                    </button>
+                    <button type="button" class="social-btn">
+                        <span class="social-icon">⚫</span> GitHub
+                    </button>
+                </div>
+            </form>
+
+            <div class="auth-links">
+                Already have an account? <a href="login.html">Login here</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:5000/api';
+
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            if (field.type === 'password') {
+                field.type = 'text';
+            } else {
+                field.type = 'password';
+            }
+        }
+
+        function checkPasswordStrength(password) {
+            const bar1 = document.getElementById('bar1');
+            const bar2 = document.getElementById('bar2');
+            const bar3 = document.getElementById('bar3');
+            const hint = document.getElementById('passwordHint');
+
+            [bar1, bar2, bar3].forEach(bar => {
+                bar.className = 'strength-bar';
+            });
+
+            if (password.length === 0) {
+                hint.textContent = 'Use 8+ characters with letters, numbers & symbols';
+                return;
+            }
+
+            let strength = 0;
+
+            if (password.length >= 8) strength++;
+            if (/\d/.test(password)) strength++;
+            if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) strength++;
+
+            if (strength >= 1) bar1.className = 'strength-bar active weak';
+            if (strength >= 2) bar2.className = 'strength-bar active medium';
+            if (strength >= 3) bar3.className = 'strength-bar active strong';
+
+            if (strength === 0) {
+                hint.textContent = '⚠️ Weak password - add more characters and symbols';
+            } else if (strength === 1) {
+                hint.textContent = '⚠️ Weak - use 8+ characters with numbers and symbols';
+            } else if (strength === 2) {
+                hint.textContent = '👍 Medium - add special characters for stronger password';
+            } else if (strength === 3) {
+                hint.textContent = '✅ Strong password! Great job!';
+            }
+        }
+
+        function checkPasswordMatch() {
+            const password = document.getElementById('password').value;
+            const confirm = document.getElementById('confirmPassword').value;
+            const matchDiv = document.getElementById('passwordMatch');
+
+            if (confirm.length === 0) {
+                matchDiv.textContent = '';
+                matchDiv.style.color = '';
+                return;
+            }
+
+            if (password === confirm) {
+                matchDiv.textContent = '✅ Passwords match!';
+                matchDiv.style.color = '#00C897';
+            } else {
+                matchDiv.textContent = '❌ Passwords do not match';
+                matchDiv.style.color = '#FF4757';
+            }
+        }
+
+        function showAlert(message, type) {
+            const container = document.getElementById('alertContainer');
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.innerHTML = `<span>${type === 'danger' ? '❌' : '✅'}</span><span>${message}</span>`;
+            container.innerHTML = '';
+            container.appendChild(alertDiv);
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.style.opacity = '0';
+                    alertDiv.style.transform = 'translateY(-10px)';
+                    setTimeout(() => {
+                        if (alertDiv.parentNode) alertDiv.remove();
+                    }, 300);
+                }
+            }, 5000);
+        }
+
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const department = document.getElementById('department').value;
+            const year = document.getElementById('year').value;
+            const password = document.getElementById('password').value;
+            const confirm = document.getElementById('confirmPassword').value;
+            const terms = document.getElementById('terms');
+
+            // Frontend validation
+            if (!name || !email || !password || !department) {
+                showAlert('Please fill in all required fields', 'danger');
+                return;
+            }
+
+            if (password !== confirm) {
+                showAlert('Passwords do not match!', 'danger');
+                return;
+            }
+
+            if (password.length < 8) {
+                showAlert('Password must be at least 8 characters long', 'danger');
+                return;
+            }
+
+            if (!terms.checked) {
+                showAlert('Please agree to the Terms of Service and Privacy Policy', 'danger');
+                return;
+            }
+
+            const registerBtn = document.getElementById('registerBtn');
+            registerBtn.disabled = true;
+            registerBtn.innerHTML = '<span class="spinner"></span> Creating account...';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        password,
+                        department,
+                        phone,
+                        year_of_study: year
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Registration successful
+                    const form = document.getElementById('registerForm');
+                    const success = document.getElementById('successMessage');
+                    
+                    form.style.display = 'none';
+                    success.style.display = 'block';
+                    
+                    // Save token if returned
+                    if (data.token) {
+                        localStorage.setItem('token', data.token);
+                        localStorage.setItem('user', JSON.stringify(data.user));
+                    }
+                    
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    showAlert(data.message || 'Registration failed', 'danger');
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                showAlert('Cannot connect to server. Make sure backend is running.', 'danger');
+            } finally {
+                registerBtn.disabled = false;
+                registerBtn.innerHTML = 'Create Account 🚀';
+            }
+        });
+
+        document.getElementById('password').addEventListener('input', function() {
+            checkPasswordStrength(this.value);
+            checkPasswordMatch();
+        });
+
+        document.getElementById('confirmPassword').addEventListener('input', checkPasswordMatch);
+    </script>
+</body>
+</html>
