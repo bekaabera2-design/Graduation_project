@@ -28,9 +28,6 @@ pool.connect((err, client, release) => {
     }
 });
 
-// ============================================
-// TEST ROUTE
-// ============================================
 app.get('/api/test', (req, res) => {
     res.json({ 
         message: '✅ Server is running!',
