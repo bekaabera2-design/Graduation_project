@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const adminController = require("../controllers/adminController");
 const { protect } = require("../middleware/authMiddleware");
-const { admin } = require("../middleware/roleMiddleware"); // ← Import admin from here
+const { admin } = require("../middleware/roleMiddleware"); 
 
 router.use(protect, admin);
 
